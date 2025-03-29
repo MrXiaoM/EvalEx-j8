@@ -15,6 +15,8 @@
 */
 package com.ezylang.evalex.config;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.entry;
+
 import com.ezylang.evalex.Expression;
 import com.ezylang.evalex.data.EvaluationValue;
 import com.ezylang.evalex.functions.AbstractFunction;
@@ -26,7 +28,6 @@ import com.ezylang.evalex.parser.Token;
 import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.util.Locale;
-import java.util.Map;
 
 public class TestConfigurationProvider {
 
@@ -36,10 +37,10 @@ public class TestConfigurationProvider {
           .locale(Locale.US)
           .build()
           .withAdditionalOperators(
-              Map.entry("++", new PrefixPlusPlusOperator()),
-              Map.entry("++", new PostfixPlusPlusOperator()),
-              Map.entry("?", new PostfixQuestionOperator()))
-          .withAdditionalFunctions(Map.entry("TEST", new DummyFunction()));
+              entry("++", new PrefixPlusPlusOperator()),
+              entry("++", new PostfixPlusPlusOperator()),
+              entry("?", new PostfixQuestionOperator()))
+          .withAdditionalFunctions(entry("TEST", new DummyFunction()));
 
   public static final ExpressionConfiguration GermanConfiguration =
       ExpressionConfiguration.builder()

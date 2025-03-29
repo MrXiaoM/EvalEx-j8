@@ -15,6 +15,7 @@
 */
 package com.ezylang.evalex.config;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ezylang.evalex.config.TestConfigurationProvider.PostfixQuestionOperator;
@@ -35,7 +36,7 @@ class MapBasedOperatorDictionaryTest {
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
         MapBasedOperatorDictionary.ofOperators(
-            Map.entry("++", prefix), Map.entry("?", postfix), Map.entry("%", infix));
+            entry("++", prefix), entry("?", postfix), entry("%", infix));
 
     assertThat(dictionary.hasPrefixOperator("++")).isTrue();
     assertThat(dictionary.hasPostfixOperator("?")).isTrue();
@@ -59,9 +60,9 @@ class MapBasedOperatorDictionaryTest {
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
         MapBasedOperatorDictionary.ofOperators(
-            Map.entry("PlusPlus", prefix),
-            Map.entry("Question", postfix),
-            Map.entry("Percent", infix));
+            entry("PlusPlus", prefix),
+            entry("Question", postfix),
+            entry("Percent", infix));
 
     assertThat(dictionary.hasPrefixOperator("PlusPlus")).isTrue();
     assertThat(dictionary.hasPrefixOperator("plusplus")).isTrue();

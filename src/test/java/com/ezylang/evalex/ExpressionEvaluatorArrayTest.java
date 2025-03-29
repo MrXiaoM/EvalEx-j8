@@ -15,6 +15,7 @@
 */
 package com.ezylang.evalex;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -28,7 +29,7 @@ class ExpressionEvaluatorArrayTest extends BaseExpressionEvaluatorTest {
 
   @Test
   void testSimpleArray() throws ParseException, EvaluationException {
-    List<BigDecimal> array = List.of(new BigDecimal(99));
+    List<BigDecimal> array = listOf(new BigDecimal(99));
     Expression expression = createExpression("a[0]").with("a", array);
 
     assertThat(expression.evaluate().getStringValue()).isEqualTo("99");
@@ -44,7 +45,7 @@ class ExpressionEvaluatorArrayTest extends BaseExpressionEvaluatorTest {
 
   @Test
   void testExpressionArray() throws ParseException, EvaluationException {
-    List<BigDecimal> array = List.of(new BigDecimal(3));
+    List<BigDecimal> array = listOf(new BigDecimal(3));
     Expression expression = createExpression("a[4-x]").with("a", array).and("x", new BigDecimal(4));
 
     assertThat(expression.evaluate().getStringValue()).isEqualTo("3");
@@ -52,7 +53,7 @@ class ExpressionEvaluatorArrayTest extends BaseExpressionEvaluatorTest {
 
   @Test
   void testNestedArray() throws ParseException, EvaluationException {
-    List<BigDecimal> arrayA = List.of(new BigDecimal(3));
+    List<BigDecimal> arrayA = listOf(new BigDecimal(3));
     List<BigDecimal> arrayB =
         Arrays.asList(new BigDecimal(2), new BigDecimal(4), new BigDecimal(6));
     Expression expression =
@@ -114,7 +115,7 @@ class ExpressionEvaluatorArrayTest extends BaseExpressionEvaluatorTest {
   void testArrayAndList() throws EvaluationException, ParseException {
     Expression expression =
         createExpression("values[i-1] * factors[i-1]")
-            .with("values", List.of(2, 3, 4))
+            .with("values", listOf(2, 3, 4))
             .and("factors", new Object[] {2, 4, 6})
             .and("i", 1);
 
@@ -145,7 +146,7 @@ class ExpressionEvaluatorArrayTest extends BaseExpressionEvaluatorTest {
   void testThrowsUnsupportedDataTypeForIndex() {
     assertThatThrownBy(
             () -> {
-              List<?> array = List.of("Hello");
+              List<?> array = listOf("Hello");
               createExpression("a[b]").with("a", array).and("b", "anotherString").evaluate();
             })
         .isInstanceOf(EvaluationException.class)
@@ -156,7 +157,7 @@ class ExpressionEvaluatorArrayTest extends BaseExpressionEvaluatorTest {
   void testArrayIndexOutOfBounds() {
     assertThatThrownBy(
             () -> {
-              List<?> array = List.of("Hello");
+              List<?> array = listOf("Hello");
               createExpression("a[1]").with("a", array).evaluate();
             })
         .isInstanceOf(EvaluationException.class)
@@ -167,7 +168,7 @@ class ExpressionEvaluatorArrayTest extends BaseExpressionEvaluatorTest {
   void testArrayNegativeIndex() {
     assertThatThrownBy(
             () -> {
-              List<?> array = List.of("Hello");
+              List<?> array = listOf("Hello");
               createExpression("a[-1]").with("a", array).evaluate();
             })
         .isInstanceOf(EvaluationException.class)

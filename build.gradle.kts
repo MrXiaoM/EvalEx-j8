@@ -51,9 +51,6 @@ spotless {
             "src/main/java/**/*.java",
             "src/test/java/**/*.java"
         )
-        googleJavaFormat("1.15.0")
-            .style("GOOGLE")
-            .reflowLongStrings(true)
         licenseHeaderFile(rootDir.resolve("spotless/header.txt"))
     }
 }

@@ -15,6 +15,7 @@
 */
 package com.ezylang.evalex.functions.basic;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ezylang.evalex.EvaluationException;
@@ -41,8 +42,8 @@ class AverageArrayTest {
 
   @Test
   void testAverageMultipleArray() throws EvaluationException, ParseException {
-    List<Number> numbers1 = List.of(1, 2, 3);
-    List<Number> numbers2 = List.of(4, 5, 6);
+    List<Number> numbers1 = listOf(1, 2, 3);
+    List<Number> numbers2 = listOf(4, 5, 6);
 
     Expression expression =
         new Expression("AVERAGE(numbers1, numbers2)")

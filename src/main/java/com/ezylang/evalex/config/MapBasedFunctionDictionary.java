@@ -18,8 +18,7 @@ package com.ezylang.evalex.config;
 import static java.util.Arrays.stream;
 
 import com.ezylang.evalex.functions.FunctionIfc;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * A default case-insensitive implementation of the function dictionary that uses a local <code>
@@ -41,6 +40,18 @@ public class MapBasedFunctionDictionary implements FunctionDictionaryIfc {
     FunctionDictionaryIfc dictionary = new MapBasedFunctionDictionary();
     stream(functions).forEach(entry -> dictionary.addFunction(entry.getKey(), entry.getValue()));
     return dictionary;
+  }
+
+  public static <K, V> Map.Entry<K, V> entry(K key, V value) {
+    return new AbstractMap.SimpleEntry<>(key, value);
+  }
+
+  public static <T> List<T> listOf(T... array) {
+    return new ArrayList<>(Arrays.asList(array));
+  }
+
+  public static <T> Set<T> setOf(T... array) {
+    return new HashSet<>(Arrays.asList(array));
   }
 
   @Override

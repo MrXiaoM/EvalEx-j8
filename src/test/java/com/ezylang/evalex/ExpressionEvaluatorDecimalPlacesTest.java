@@ -15,12 +15,14 @@
 */
 package com.ezylang.evalex;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ezylang.evalex.config.ExpressionConfiguration;
 import com.ezylang.evalex.data.EvaluationValue;
 import com.ezylang.evalex.parser.ParseException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -56,7 +58,7 @@ class ExpressionEvaluatorDecimalPlacesTest extends BaseExpressionEvaluatorTest {
 
   @Test
   void testDefaultNoRoundingArray() throws ParseException, EvaluationException {
-    List<BigDecimal> array = List.of(new BigDecimal("1.12345"));
+    List<BigDecimal> array = listOf(new BigDecimal("1.12345"));
     Expression expression = createExpression("a[0]").with("a", array);
 
     assertThat(expression.evaluate().getStringValue()).isEqualTo("1.12345");
@@ -64,7 +66,8 @@ class ExpressionEvaluatorDecimalPlacesTest extends BaseExpressionEvaluatorTest {
 
   @Test
   void testDefaultNoRoundingStructure() throws ParseException, EvaluationException {
-    Map<String, BigDecimal> structure = Map.of("b", new BigDecimal("1.12345"));
+    Map<String, BigDecimal> structure = new HashMap<>();
+    structure.put("b", new BigDecimal("1.12345"));
 
     Expression expression = createExpression("a.b").with("a", structure);
 
@@ -122,7 +125,7 @@ class ExpressionEvaluatorDecimalPlacesTest extends BaseExpressionEvaluatorTest {
   void testCustomRoundingDecimalsArray() throws ParseException, EvaluationException {
     ExpressionConfiguration config =
         ExpressionConfiguration.builder().decimalPlacesRounding(3).build();
-    List<BigDecimal> array = List.of(new BigDecimal("1.12345"));
+    List<BigDecimal> array = listOf(new BigDecimal("1.12345"));
     Expression expression = new Expression("a[0]", config).with("a", array);
 
     assertThat(expression.evaluate().getStringValue()).isEqualTo("1.123");
@@ -132,7 +135,8 @@ class ExpressionEvaluatorDecimalPlacesTest extends BaseExpressionEvaluatorTest {
   void testCustomRoundingStructure() throws ParseException, EvaluationException {
     ExpressionConfiguration config =
         ExpressionConfiguration.builder().decimalPlacesRounding(3).build();
-    Map<String, BigDecimal> structure = Map.of("b", new BigDecimal("1.12345"));
+    Map<String, BigDecimal> structure = new HashMap<>();
+    structure.put("b", new BigDecimal("1.12345"));
 
     Expression expression = new Expression("a.b", config).with("a", structure);
 

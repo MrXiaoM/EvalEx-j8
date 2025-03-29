@@ -15,6 +15,7 @@
 */
 package com.ezylang.evalex.config;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ezylang.evalex.config.TestConfigurationProvider.DummyFunction;
@@ -25,6 +26,7 @@ import com.ezylang.evalex.operators.OperatorIfc;
 import com.ezylang.evalex.operators.arithmetic.InfixPlusOperator;
 import java.math.MathContext;
 import java.time.ZoneId;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -65,8 +67,8 @@ class ExpressionConfigurationTest {
     ExpressionConfiguration configuration =
         ExpressionConfiguration.defaultConfiguration()
             .withAdditionalOperators(
-                Map.entry("ADDED1", new InfixPlusOperator()),
-                Map.entry("ADDED2", new InfixPlusOperator()));
+                entry("ADDED1", new InfixPlusOperator()),
+                entry("ADDED2", new InfixPlusOperator()));
 
     assertThat(configuration.getOperatorDictionary().hasInfixOperator("ADDED1")).isTrue();
     assertThat(configuration.getOperatorDictionary().hasInfixOperator("ADDED2")).isTrue();
@@ -77,7 +79,7 @@ class ExpressionConfigurationTest {
     ExpressionConfiguration configuration =
         ExpressionConfiguration.defaultConfiguration()
             .withAdditionalFunctions(
-                Map.entry("ADDED1", new DummyFunction()), Map.entry("ADDED2", new DummyFunction()));
+                entry("ADDED1", new DummyFunction()), entry("ADDED2", new DummyFunction()));
 
     assertThat(configuration.getFunctionDictionary().hasFunction("ADDED1")).isTrue();
     assertThat(configuration.getFunctionDictionary().hasFunction("ADDED2")).isTrue();
@@ -133,10 +135,9 @@ class ExpressionConfigurationTest {
 
   @Test
   void testCustomConstants() {
-    Map<String, EvaluationValue> constants =
-        Map.of(
-            "A", EvaluationValue.stringValue("a"),
-            "B", EvaluationValue.stringValue("b"));
+    Map<String, EvaluationValue> constants = new HashMap<>();
+    constants.put("A", EvaluationValue.stringValue("a"));
+    constants.put("B", EvaluationValue.stringValue("b"));
     ExpressionConfiguration configuration =
         ExpressionConfiguration.builder().defaultConstants(constants).build();
 
