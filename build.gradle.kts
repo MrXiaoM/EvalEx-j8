@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "top.mrxiaom"
-version = "3.5.0-SNAPSHOT"
+// `version` has moved to gradle.properties
 
 repositories {
     mavenCentral()
@@ -63,11 +63,12 @@ publishing {
             version = rootProject.version.toString()
 
             pom {
+                name = rootProject.name
                 description = "EvalEx is a handy expression evaluator for Java, that allows to evaluate expressions."
-                url = "https://github.com/MrXiaoM/EvalEx"
+                url = "https://github.com/MrXiaoM/EvalEx-j8"
                 organization {
                     name = "MrXiaoM"
-                    url = "https://github.com/MrXiaoM/EvalEx"
+                    url = "https://github.com/MrXiaoM/EvalEx-j8"
                 }
                 licenses {
                     license {
@@ -86,13 +87,13 @@ publishing {
                     }
                 }
                 scm {
-                    connection = "scm:git:git@github.com:MrXiaoM/EvalEx.git"
-                    developerConnection = "scm:git:git@github.com:MrXiaoM/EvalEx.git"
-                    url = "https://github.com/MrXiaoM/EvalEx"
+                    connection = "scm:git:git@github.com:MrXiaoM/EvalEx-j8.git"
+                    developerConnection = "scm:git:git@github.com:MrXiaoM/EvalEx-j8.git"
+                    url = "https://github.com/MrXiaoM/EvalEx-j8"
                 }
                 issueManagement {
                     system = "github"
-                    url = "https://github.com/MrXiaoM/EvalEx/issues"
+                    url = "https://github.com/MrXiaoM/EvalEx-j8/issues"
                 }
             }
         }
