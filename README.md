@@ -56,8 +56,8 @@ To include it in your Maven project, add the dependency to your pom. For example
 ```xml
 <dependencies>
     <dependency>
-      <groupId>com.ezylang</groupId>
-      <artifactId>EvalEx</artifactId>
+      <groupId>top.mrxiaom</groupId>
+      <artifactId>EvalEx-j8</artifactId>
       <version>3.4.0</version>
     </dependency>
 </dependencies>
@@ -69,7 +69,7 @@ If you're using gradle add the dependencies to your project's app build.gradle:
 
 ```gradle
 dependencies {
-    compile 'com.ezylang:EvalEx:3.4.0'
+    implementation("top.mrxiaom:EvalEx-j8:3.4.0")
 }
 ```
 
