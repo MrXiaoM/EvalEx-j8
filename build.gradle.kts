@@ -1,8 +1,10 @@
+import moe.karla.maven.publishing.MavenPublishingExtension.PublishingType
+
 plugins {
     java
     `maven-publish`
     signing
-    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+    id("moe.karla.maven-publishing")
     id("com.diffplug.spotless") version "6.13.0"
 }
 
@@ -107,13 +109,6 @@ signing {
         sign(publishing.publications.getByName("maven"))
     }
 }
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-            username.set(findProperty("MAVEN_USERNAME")?.toString())
-            password.set(findProperty("MAVEN_PASSWORD")?.toString())
-        }
-    }
+mavenPublishing {
+    publishingType = PublishingType.AUTOMATIC
 }

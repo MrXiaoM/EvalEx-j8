@@ -21,7 +21,7 @@ EvalEx is a handy expression evaluator for Java, that allows to parse and evalua
 - Custom functions and operators can be added.
 - Functions can be defined with a variable number of arguments (see MIN, MAX and SUM functions).
 - Supports hexadecimal and scientific notations of numbers.
-- Supports implicit multiplication, e.g. 2x or (a+b)(a-b) or 2(x-y) which equals to (a+b)\*(a-b) or 2\*(
+- Supports implicit multiplication, e.g. 2x, 2sin(x), (a+b)(a-b) or 2(x-y) which equals to (a+b)\*(a-b) or 2\*(
   x-y)
 - Lazy evaluation of function parameters (see the IF function) and support of sub-expressions.
 - Requires minimum Java version 11.
@@ -52,7 +52,7 @@ To include it in your Maven project, add the dependency to your pom. For example
     <dependency>
       <groupId>com.ezylang</groupId>
       <artifactId>EvalEx</artifactId>
-      <version>3.4.0</version>
+      <version>3.6.1</version>
     </dependency>
 </dependencies>
 ```
@@ -63,7 +63,7 @@ If you're using gradle add the dependencies to your project's app build.gradle:
 
 ```gradle
 dependencies {
-    compile 'com.ezylang:EvalEx:3.4.0'
+    compile 'com.ezylang:EvalEx:3.6.1'
 }
 ```
 

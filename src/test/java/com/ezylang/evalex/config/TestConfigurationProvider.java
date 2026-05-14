@@ -27,9 +27,17 @@ import com.ezylang.evalex.operators.PrefixOperator;
 import com.ezylang.evalex.parser.Token;
 import java.math.BigDecimal;
 import java.time.ZoneId;
+import java.util.AbstractMap;
 import java.util.Locale;
 
 public class TestConfigurationProvider {
+
+  public static final ExpressionConfiguration StandardConfigurationLenient =
+      ExpressionConfiguration.builder()
+          .zoneId(ZoneId.of("Europe/Berlin"))
+          .locale(Locale.US)
+          .lenientMode(true)
+          .build();
 
   public static final ExpressionConfiguration StandardConfigurationWithAdditionalTestOperators =
       ExpressionConfiguration.builder()
@@ -37,10 +45,25 @@ public class TestConfigurationProvider {
           .locale(Locale.US)
           .build()
           .withAdditionalOperators(
-              entry("++", new PrefixPlusPlusOperator()),
-              entry("++", new PostfixPlusPlusOperator()),
-              entry("?", new PostfixQuestionOperator()))
-          .withAdditionalFunctions(entry("TEST", new DummyFunction()));
+              new AbstractMap.SimpleEntry<>("++", new PrefixPlusPlusOperator()),
+              new AbstractMap.SimpleEntry<>("++", new PostfixPlusPlusOperator()), 
+              new AbstractMap.SimpleEntry<>("?", new PostfixQuestionOperator()))
+          .withAdditionalFunctions(
+              new AbstractMap.SimpleEntry<>("TEST", new DummyFunction()), new AbstractMap.SimpleEntry<>("F", new DummyFunction()));
+
+  public static final ExpressionConfiguration
+      StandardConfigurationWithAdditionalTestOperatorsLenient =
+          ExpressionConfiguration.builder()
+              .zoneId(ZoneId.of("Europe/Berlin"))
+              .locale(Locale.US)
+              .lenientMode(true)
+              .build()
+              .withAdditionalOperators(
+                  new AbstractMap.SimpleEntry<>("++", new PrefixPlusPlusOperator()),
+                  new AbstractMap.SimpleEntry<>("++", new PostfixPlusPlusOperator()),
+                  new AbstractMap.SimpleEntry<>("?", new PostfixQuestionOperator()))
+              .withAdditionalFunctions(
+                  new AbstractMap.SimpleEntry<>("TEST", new DummyFunction()), new AbstractMap.SimpleEntry<>("F", new DummyFunction()));
 
   public static final ExpressionConfiguration GermanConfiguration =
       ExpressionConfiguration.builder()

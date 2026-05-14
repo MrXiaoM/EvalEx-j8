@@ -46,10 +46,12 @@ public class MapBasedFunctionDictionary implements FunctionDictionaryIfc {
     return new AbstractMap.SimpleEntry<>(key, value);
   }
 
+  @SafeVarargs
   public static <T> List<T> listOf(T... array) {
     return new ArrayList<>(Arrays.asList(array));
   }
 
+  @SafeVarargs
   public static <T> Set<T> setOf(T... array) {
     return new HashSet<>(Arrays.asList(array));
   }
@@ -57,6 +59,16 @@ public class MapBasedFunctionDictionary implements FunctionDictionaryIfc {
   @Override
   public FunctionIfc getFunction(String functionName) {
     return functions.get(functionName);
+  }
+
+  @Override
+  public Set<String> getAvailableFunctionNames() {
+    return new HashSet<>(functions.keySet());
+  }
+
+  @Override
+  public Set<FunctionIfc> getAvailableFunctions() {
+    return new HashSet<>(functions.values());
   }
 
   @Override

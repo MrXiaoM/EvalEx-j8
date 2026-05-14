@@ -18,7 +18,10 @@ package com.ezylang.evalex.config;
 import static java.util.Arrays.stream;
 
 import com.ezylang.evalex.operators.OperatorIfc;
+
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -71,5 +74,35 @@ public class MapBasedOperatorDictionary implements OperatorDictionaryIfc {
   @Override
   public OperatorIfc getInfixOperator(String operatorString) {
     return infixOperators.get(operatorString);
+  }
+
+  @Override
+  public Set<String> getAvailablePrefixOperatorNames() {
+    return new HashSet<>(prefixOperators.keySet());
+  }
+
+  @Override
+  public Set<String> getAvailablePostfixOperatorNames() {
+    return new HashSet<>(postfixOperators.keySet());
+  }
+
+  @Override
+  public Set<String> getAvailableInfixOperatorNames() {
+    return new HashSet<>(infixOperators.keySet());
+  }
+
+  @Override
+  public Set<OperatorIfc> getAvailablePrefixOperators() {
+    return new HashSet<>(prefixOperators.values());
+  }
+
+  @Override
+  public Set<OperatorIfc> getAvailablePostfixOperators() {
+    return new HashSet<>(postfixOperators.values());
+  }
+
+  @Override
+  public Set<OperatorIfc> getAvailableInfixOperators() {
+    return new HashSet<>(infixOperators.values());
   }
 }

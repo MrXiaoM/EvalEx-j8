@@ -23,7 +23,7 @@ jobs:
           java-version: '8'
           distribution: 'corretto'
       - name: Build
-        run: ./gradlew build
+        run: ./gradlew clean build
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
