@@ -15,6 +15,8 @@
 */
 package com.ezylang.evalex.config;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.entry;
+
 import com.ezylang.evalex.Expression;
 import com.ezylang.evalex.data.EvaluationValue;
 import com.ezylang.evalex.functions.AbstractFunction;

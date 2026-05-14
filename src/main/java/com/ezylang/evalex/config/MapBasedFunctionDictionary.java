@@ -18,7 +18,6 @@ package com.ezylang.evalex.config;
 import static java.util.Arrays.stream;
 
 import com.ezylang.evalex.functions.FunctionIfc;
-
 import java.util.*;
 
 /**
