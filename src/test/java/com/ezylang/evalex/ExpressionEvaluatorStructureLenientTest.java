@@ -23,7 +23,8 @@ import com.ezylang.evalex.config.TestConfigurationProvider;
 import com.ezylang.evalex.data.EvaluationValue;
 import com.ezylang.evalex.data.EvaluationValue.DataType;
 import com.ezylang.evalex.parser.ParseException;
-import java.util.Map;
+
+import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -47,7 +48,7 @@ class ExpressionEvaluatorStructureLenientTest {
 
   @Test
   void testStructureTwoLevelsWithAllVariablesDefined() throws EvaluationException, ParseException {
-    Expression expression = createExpression("root.child").with("root", Map.of("child", "text"));
+    Expression expression = createExpression("root.child").with("root", new HashMap<String, String>() {{ put("child", "text"); }});
     EvaluationValue evaluationValue = expression.evaluate();
     assertThat(evaluationValue.getStringValue()).isEqualTo("text");
   }
@@ -79,7 +80,7 @@ class ExpressionEvaluatorStructureLenientTest {
   void testStructureThreoLevelsWithBrachVariableNotDefined()
       throws EvaluationException, ParseException {
     Expression expression =
-        createExpression("root.branch.child").with("root", Map.of("branch", emptyMap()));
+        createExpression("root.branch.child").with("root", new HashMap<String, Object>() {{ put("branch", emptyMap()); }});
     EvaluationValue evaluationValue = expression.evaluate();
     assertThat(evaluationValue.getDataType()).isEqualTo(DataType.UNDEFINED);
   }

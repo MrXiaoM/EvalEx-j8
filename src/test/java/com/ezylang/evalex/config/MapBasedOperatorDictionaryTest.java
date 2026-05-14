@@ -15,12 +15,15 @@
 */
 package com.ezylang.evalex.config;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ezylang.evalex.config.TestConfigurationProvider.PostfixQuestionOperator;
 import com.ezylang.evalex.config.TestConfigurationProvider.PrefixPlusPlusOperator;
 import com.ezylang.evalex.operators.OperatorIfc;
 import com.ezylang.evalex.operators.arithmetic.InfixModuloOperator;
+
+import java.util.AbstractMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +38,7 @@ class MapBasedOperatorDictionaryTest {
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
         MapBasedOperatorDictionary.ofOperators(
-            Map.entry("++", prefix), Map.entry("?", postfix), Map.entry("%", infix));
+            entry("++", prefix), entry("?", postfix), entry("%", infix));
 
     assertThat(dictionary.hasPrefixOperator("++")).isTrue();
     assertThat(dictionary.hasPostfixOperator("?")).isTrue();
@@ -59,9 +62,9 @@ class MapBasedOperatorDictionaryTest {
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
         MapBasedOperatorDictionary.ofOperators(
-            Map.entry("PlusPlus", prefix),
-            Map.entry("Question", postfix),
-            Map.entry("Percent", infix));
+            entry("PlusPlus", prefix),
+            entry("Question", postfix),
+            entry("Percent", infix));
 
     assertThat(dictionary.hasPrefixOperator("PlusPlus")).isTrue();
     assertThat(dictionary.hasPrefixOperator("plusplus")).isTrue();
@@ -82,7 +85,7 @@ class MapBasedOperatorDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
-        MapBasedOperatorDictionary.ofOperators(Map.entry("++", prefix));
+        MapBasedOperatorDictionary.ofOperators(new AbstractMap.SimpleEntry<>("++", prefix));
 
     assertThat(dictionary.getAvailablePrefixOperatorNames()).containsExactly("++");
   }
@@ -93,7 +96,7 @@ class MapBasedOperatorDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
-        MapBasedOperatorDictionary.ofOperators(Map.entry("?", postfix));
+        MapBasedOperatorDictionary.ofOperators(new AbstractMap.SimpleEntry<>("?", postfix));
 
     assertThat(dictionary.getAvailablePostfixOperatorNames()).containsExactly("?");
   }
@@ -104,7 +107,7 @@ class MapBasedOperatorDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
-        MapBasedOperatorDictionary.ofOperators(Map.entry("%", infix));
+        MapBasedOperatorDictionary.ofOperators(new AbstractMap.SimpleEntry<>("%", infix));
 
     assertThat(dictionary.getAvailableInfixOperatorNames()).containsExactly("%");
   }
@@ -115,7 +118,7 @@ class MapBasedOperatorDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
-        MapBasedOperatorDictionary.ofOperators(Map.entry("++", prefix));
+        MapBasedOperatorDictionary.ofOperators(new AbstractMap.SimpleEntry<>("++", prefix));
 
     assertThat(dictionary.getAvailablePrefixOperators()).containsExactly(prefix);
   }
@@ -126,7 +129,7 @@ class MapBasedOperatorDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
-        MapBasedOperatorDictionary.ofOperators(Map.entry("?", postfix));
+        MapBasedOperatorDictionary.ofOperators(new AbstractMap.SimpleEntry<>("?", postfix));
 
     assertThat(dictionary.getAvailablePostfixOperators()).containsExactly(postfix);
   }
@@ -137,7 +140,7 @@ class MapBasedOperatorDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     OperatorDictionaryIfc dictionary =
-        MapBasedOperatorDictionary.ofOperators(Map.entry("%", infix));
+        MapBasedOperatorDictionary.ofOperators(new AbstractMap.SimpleEntry<>("%", infix));
 
     assertThat(dictionary.getAvailableInfixOperators()).containsExactly(infix);
   }

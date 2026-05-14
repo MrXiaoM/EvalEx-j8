@@ -25,8 +25,8 @@ import com.ezylang.evalex.operators.PrefixOperator;
 import com.ezylang.evalex.parser.Token;
 import java.math.BigDecimal;
 import java.time.ZoneId;
+import java.util.AbstractMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class TestConfigurationProvider {
 
@@ -43,11 +43,11 @@ public class TestConfigurationProvider {
           .locale(Locale.US)
           .build()
           .withAdditionalOperators(
-              Map.entry("++", new PrefixPlusPlusOperator()),
-              Map.entry("++", new PostfixPlusPlusOperator()),
-              Map.entry("?", new PostfixQuestionOperator()))
+              new AbstractMap.SimpleEntry<>("++", new PrefixPlusPlusOperator()),
+              new AbstractMap.SimpleEntry<>("++", new PostfixPlusPlusOperator()), 
+              new AbstractMap.SimpleEntry<>("?", new PostfixQuestionOperator()))
           .withAdditionalFunctions(
-              Map.entry("TEST", new DummyFunction()), Map.entry("F", new DummyFunction()));
+              new AbstractMap.SimpleEntry<>("TEST", new DummyFunction()), new AbstractMap.SimpleEntry<>("F", new DummyFunction()));
 
   public static final ExpressionConfiguration
       StandardConfigurationWithAdditionalTestOperatorsLenient =
@@ -57,11 +57,11 @@ public class TestConfigurationProvider {
               .lenientMode(true)
               .build()
               .withAdditionalOperators(
-                  Map.entry("++", new PrefixPlusPlusOperator()),
-                  Map.entry("++", new PostfixPlusPlusOperator()),
-                  Map.entry("?", new PostfixQuestionOperator()))
+                  new AbstractMap.SimpleEntry<>("++", new PrefixPlusPlusOperator()),
+                  new AbstractMap.SimpleEntry<>("++", new PostfixPlusPlusOperator()),
+                  new AbstractMap.SimpleEntry<>("?", new PostfixQuestionOperator()))
               .withAdditionalFunctions(
-                  Map.entry("TEST", new DummyFunction()), Map.entry("F", new DummyFunction()));
+                  new AbstractMap.SimpleEntry<>("TEST", new DummyFunction()), new AbstractMap.SimpleEntry<>("F", new DummyFunction()));
 
   public static final ExpressionConfiguration GermanConfiguration =
       ExpressionConfiguration.builder()

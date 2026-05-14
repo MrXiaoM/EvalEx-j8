@@ -15,6 +15,7 @@
 */
 package com.ezylang.evalex.config;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -35,7 +36,7 @@ class MapBasedFunctionDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     FunctionDictionaryIfc dictionary =
-        MapBasedFunctionDictionary.ofFunctions(Map.entry("min", min), Map.entry("max", max));
+        MapBasedFunctionDictionary.ofFunctions(entry("min", min), entry("max", max));
 
     assertThat(dictionary.getAvailableFunctionNames()).containsExactlyInAnyOrder("min", "max");
     assertThat(dictionary.getFunction("min")).isEqualTo(min);
@@ -49,7 +50,7 @@ class MapBasedFunctionDictionaryTest {
 
     @SuppressWarnings({"unchecked", "varargs"})
     FunctionDictionaryIfc dictionary =
-        MapBasedFunctionDictionary.ofFunctions(Map.entry("Min", min), Map.entry("MAX", max));
+        MapBasedFunctionDictionary.ofFunctions(entry("Min", min), entry("MAX", max));
 
     assertThat(dictionary.hasFunction("min")).isTrue();
     assertThat(dictionary.hasFunction("MIN")).isTrue();

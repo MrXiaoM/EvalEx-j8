@@ -15,6 +15,7 @@
 */
 package com.ezylang.evalex.parser;
 
+import static com.ezylang.evalex.config.MapBasedFunctionDictionary.entry;
 import static com.ezylang.evalex.operators.OperatorIfc.OPERATOR_PRECEDENCE_AND;
 import static com.ezylang.evalex.operators.OperatorIfc.OPERATOR_PRECEDENCE_OR;
 
@@ -35,10 +36,10 @@ class TokenizerLiteralOperatorsTest extends BaseParserTest {
   public void setup() {
     configuration =
         configuration.withAdditionalOperators(
-            Map.entry("AND", new AndOperator()),
-            Map.entry("OR", new OrOperator()),
-            Map.entry("NOT", new NotOperator()),
-            Map.entry("DENIED", new DeniedOperator()));
+            entry("AND", new AndOperator()),
+            entry("OR", new OrOperator()),
+            entry("NOT", new NotOperator()),
+            entry("DENIED", new DeniedOperator()));
   }
 
   @Test
